@@ -34,7 +34,7 @@ const NAV = [
   { label: "ROSTER", href: "#roster" },
   { label: "NEWS", href: "#news" },
   { label: "SPONSORS", href: "#sponsors" },
-  { label: "CONTACT", href: "#contact" },
+  { label: "CONTACT", href: "/contact" },
 ];
 
 const ROSTER = [
@@ -122,7 +122,7 @@ function Header() {
         </nav>
 
         <a
-          href="#contact"
+          href="/contact"
           className="hidden md:inline-flex bg-gradient-primary text-primary-foreground font-display font-semibold tracking-widest text-xs px-5 py-2.5 rounded-sm hover:shadow-[var(--shadow-glow)] transition-shadow"
         >
           JOIN US
