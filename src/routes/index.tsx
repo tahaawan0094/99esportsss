@@ -67,11 +67,11 @@ const NEWS = [
 ];
 
 const ACHIEVEMENT_IMAGES = import.meta.glob(
-  "../achievments/*.{png,jpg,jpeg,webp}",
+  "../hd/*.{png,jpg,jpeg,webp}",
   { eager: true, as: "url" },
 ) as Record<string, string>;
 
-const ACHIEVEMENT_SELECTION = ["7.png", "8.png", "17.png"];
+const ACHIEVEMENT_SELECTION = ["hd1.png", "hd2.png", "hd3.png"];
 
 const ACHIEVEMENTS = Object.entries(ACHIEVEMENT_IMAGES)
   .map(([path, src]) => ({ path, src }))
