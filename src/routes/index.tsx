@@ -18,6 +18,9 @@ import playerImg from "@/assets/player.jpg";
 import news1 from "@/assets/news1.jpg";
 import news3 from "@/assets/news3.jpg";
 import ctaSoldier from "@/assets/cta-soldier.jpg";
+import gearImg1 from "@/team-gear/WhatsApp Image 2026-04-29 at 12.53.13 PM.jpeg";
+import gearImg2 from "@/team-gear/4.jpeg";
+import gearImg3 from "@/team-gear/5.jpeg";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -408,6 +411,55 @@ function Sponsors() {
   );
 }
 
+function TeamGear() {
+  const gearImages = [gearImg1, gearImg2, gearImg3];
+  return (
+    <section id="team-gear" className="py-24 px-4 sm:px-6 bg-surface">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-10">
+          <motion.h2 {...fadeUp()} className="font-display text-primary tracking-[0.3em] text-sm font-semibold">
+            TEAM GEAR
+          </motion.h2>
+          <motion.p
+            {...fadeUp(0.1)}
+            className="text-xs tracking-widest text-muted-foreground"
+          >
+            Check out our latest apparel and accessories
+          </motion.p>
+        </div>
+
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {gearImages.map((src, index) => (
+            <motion.div
+              key={index}
+              {...fadeUp(index * 0.05)}
+              whileHover={{ y: -6 }}
+              className="overflow-hidden rounded-3xl border border-border/60 bg-background"
+            >
+              <div className="aspect-[4/5] w-full overflow-hidden bg-background/60">
+                <img
+                  src={src}
+                  alt={`Team Gear ${index + 1}`}
+                  className="block h-full w-full object-cover object-center"
+                  loading="lazy"
+                />
+              </div>
+            </motion.div>
+          ))}
+        </div>
+        <motion.div {...fadeUp(0.2)} className="text-center mt-10">
+          <a
+            href="/team-gear"
+            className="inline-flex items-center justify-center rounded-sm border border-primary/70 bg-background px-8 py-3 text-xs font-semibold tracking-widest text-foreground hover:bg-primary hover:text-primary-foreground transition-all"
+          >
+            VIEW ALL GEAR
+          </a>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 function CTA() {
   return (
     <section id="contact" className="relative overflow-hidden">
@@ -515,6 +567,7 @@ function Index() {
       <Roster />
       <News />
       <Sponsors />
+      <TeamGear />
       <CTA />
       <Footer />
     </div>
