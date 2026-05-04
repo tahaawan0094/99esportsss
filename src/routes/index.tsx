@@ -11,6 +11,7 @@ import {
   ArrowRight,
   Mail,
   AtSign,
+  ChevronDown,
 } from "lucide-react";
 import logo from "@/assets/logo.png";
 import heroSoldiers from "@/assets/hero-soldiers.jpg";
@@ -28,13 +29,18 @@ export const Route = createFileRoute("/")({
 
 const NAV = [
   { label: "HOME", href: "#home" },
-  { label: "ABOUT", href: "/about" },
   { label: "TEAM GEAR", href: "/team-gear" },
   { label: "ACHIEVMENT", href: "/achievement" },
   { label: "ROSTER", href: "#roster" },
-  { label: "NEWS", href: "#news" },
-  { label: "SPONSORS", href: "#sponsors" },
-  { label: "CONTACT", href: "/contact" },
+  {
+    label: "MORE",
+    href: "#",
+    subItems: [
+      { label: "ABOUT", href: "/about" },
+      { label: "BLOGS", href: "/blogs" },
+      { label: "CONTACT", href: "/contact" },
+    ],
+  },
 ];
 
 const ROSTER = [
@@ -95,6 +101,8 @@ function Logo({ className = "" }: { className?: string }) {
 
 function Header() {
   const [open, setOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
   return (
     <motion.header
       initial={{ y: -30, opacity: 0 }}
@@ -109,16 +117,46 @@ function Header() {
         </a>
 
         <nav className="hidden md:flex items-center gap-8">
-          {NAV.map((n) => (
-            <a
-              key={n.label}
-              href={n.href}
-              className="text-xs font-semibold tracking-widest text-muted-foreground hover:text-primary transition-colors relative group"
-            >
-              {n.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
-            </a>
-          ))}
+          {NAV.map((n) =>
+            n.subItems ? (
+              <div
+                key={n.label}
+                className="relative group"
+                onMouseEnter={() => setDropdownOpen(true)}
+                onMouseLeave={() => setDropdownOpen(false)}
+              >
+                <button className="flex items-center gap-1 text-xs font-semibold tracking-widest text-muted-foreground hover:text-primary transition-colors uppercase">
+                  {n.label} <ChevronDown size={12} className={`transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : ''}`} />
+                </button>
+                {dropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="absolute top-full left-0 mt-2 w-48 bg-surface border border-border/50 py-2 rounded-sm shadow-xl"
+                  >
+                    {n.subItems.map((sub) => (
+                      <a
+                        key={sub.label}
+                        href={sub.href}
+                        className="block px-4 py-2 text-[10px] font-bold tracking-[0.2em] text-muted-foreground hover:text-primary hover:bg-white/5 transition-all"
+                      >
+                        {sub.label}
+                      </a>
+                    ))}
+                  </motion.div>
+                )}
+              </div>
+            ) : (
+              <a
+                key={n.label}
+                href={n.href}
+                className="text-xs font-semibold tracking-widest text-muted-foreground hover:text-primary transition-colors relative group"
+              >
+                {n.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+              </a>
+            )
+          )}
         </nav>
 
         <a
@@ -143,16 +181,32 @@ function Header() {
           className="md:hidden border-t border-border bg-background overflow-hidden"
         >
           <div className="flex flex-col p-6 gap-4">
-            {NAV.map((n) => (
-              <a
-                key={n.label}
-                href={n.href}
-                onClick={() => setOpen(false)}
-                className="text-sm font-semibold tracking-widest text-muted-foreground hover:text-primary"
-              >
-                {n.label}
-              </a>
-            ))}
+            {NAV.map((n) =>
+              n.subItems ? (
+                <div key={n.label} className="flex flex-col gap-3">
+                  <span className="text-[10px] tracking-[0.3em] text-primary font-bold">{n.label}</span>
+                  {n.subItems.map((sub) => (
+                    <a
+                      key={sub.label}
+                      href={sub.href}
+                      onClick={() => setOpen(false)}
+                      className="text-sm font-semibold tracking-widest text-muted-foreground hover:text-primary pl-2"
+                    >
+                      {sub.label}
+                    </a>
+                  ))}
+                </div>
+              ) : (
+                <a
+                  key={n.label}
+                  href={n.href}
+                  onClick={() => setOpen(false)}
+                  className="text-sm font-semibold tracking-widest text-muted-foreground hover:text-primary"
+                >
+                  {n.label}
+                </a>
+              )
+            )}
           </div>
         </motion.div>
       )}
@@ -531,6 +585,7 @@ function Footer() {
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li><a href="#home" className="hover:text-primary">Home</a></li>
             <li><a href="/about" className="hover:text-primary">About</a></li>
+            <li><a href="/faq" className="hover:text-primary">FAQ's</a></li>
             <li><a href="#roster" className="hover:text-primary">Roster</a></li>
             <li><a href="#news" className="hover:text-primary">News</a></li>
           </ul>

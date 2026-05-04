@@ -9,39 +9,47 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as AboutRouteImport } from './routes/about'
-import { Route as AchievementRouteImport } from './routes/achievement'
 import { Route as TeamGearRouteImport } from './routes/team-gear'
+import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
-
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRouteImport,
-} as any)
-
-const AchievementRoute = AchievementRouteImport.update({
-  id: '/achievement',
-  path: '/achievement',
-  getParentRoute: () => rootRouteImport,
-} as any)
+import { Route as BlogsRouteImport } from './routes/blogs'
+import { Route as AchievementRouteImport } from './routes/achievement'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as IndexRouteImport } from './routes/index'
 
 const TeamGearRoute = TeamGearRouteImport.update({
   id: '/team-gear',
   path: '/team-gear',
   getParentRoute: () => rootRouteImport,
 } as any)
-
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogsRoute = BlogsRouteImport.update({
+  id: '/blogs',
+  path: '/blogs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AchievementRoute = AchievementRouteImport.update({
+  id: '/achievement',
+  path: '/achievement',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -49,68 +57,84 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/achievement': typeof AchievementRoute
-  '/team-gear': typeof TeamGearRoute
+  '/blogs': typeof BlogsRoute
   '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
+  '/team-gear': typeof TeamGearRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/achievement': typeof AchievementRoute
-  '/team-gear': typeof TeamGearRoute
+  '/blogs': typeof BlogsRoute
   '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
+  '/team-gear': typeof TeamGearRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/achievement': typeof AchievementRoute
-  '/team-gear': typeof TeamGearRoute
+  '/blogs': typeof BlogsRoute
   '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
+  '/team-gear': typeof TeamGearRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/achievement' | '/team-gear' | '/contact'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/achievement'
+    | '/blogs'
+    | '/contact'
+    | '/faq'
+    | '/team-gear'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/achievement' | '/team-gear' | '/contact'
-  id: '__root__' | '/' | '/about' | '/achievement' | '/team-gear' | '/contact'
+  to:
+    | '/'
+    | '/about'
+    | '/achievement'
+    | '/blogs'
+    | '/contact'
+    | '/faq'
+    | '/team-gear'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/achievement'
+    | '/blogs'
+    | '/contact'
+    | '/faq'
+    | '/team-gear'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AchievementRoute: typeof AchievementRoute
-  TeamGearRoute: typeof TeamGearRoute
+  BlogsRoute: typeof BlogsRoute
   ContactRoute: typeof ContactRoute
+  FaqRoute: typeof FaqRoute
+  TeamGearRoute: typeof TeamGearRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/achievement': {
-      id: '/achievement'
-      path: '/achievement'
-      fullPath: '/achievement'
-      preLoaderRoute: typeof AchievementRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/team-gear': {
       id: '/team-gear'
       path: '/team-gear'
       fullPath: '/team-gear'
       preLoaderRoute: typeof TeamGearRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -120,6 +144,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blogs': {
+      id: '/blogs'
+      path: '/blogs'
+      fullPath: '/blogs'
+      preLoaderRoute: typeof BlogsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/achievement': {
+      id: '/achievement'
+      path: '/achievement'
+      fullPath: '/achievement'
+      preLoaderRoute: typeof AchievementRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -127,18 +179,11 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AchievementRoute: AchievementRoute,
-  TeamGearRoute: TeamGearRoute,
+  BlogsRoute: BlogsRoute,
   ContactRoute: ContactRoute,
+  FaqRoute: FaqRoute,
+  TeamGearRoute: TeamGearRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
